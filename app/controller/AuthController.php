@@ -1,5 +1,7 @@
 <?php
 require('./app/models/User.php');
+require('./app/models/Adress.php');
+require('./app/models/Store.php');
 
 class AuthController {
 
@@ -12,7 +14,34 @@ class AuthController {
     {
         $user = new User($data);
 
-        $user ->store();
+        $login = $user ->auth();
+        
+        if(!$login)
+        {
+            require('./views/login.php');
+        }
+        else
+        {
+            require('./views/dashboard.php');
+        }
+    }
+    public function create(array $data)
+    {
+        if($_SERVER['REQUEST_METHOD'] === 'POST')
+        {
+            $user = new User($data);
+            $user -> create();
+            require('./views/login.php');
+        }
+        else
+        {
+            $adress = new Adress();
+            $address = $adress -> all();
+            
+            $store = new Store();
+            $stores = $store -> all();
+            require('./views/register.php');
+        }
     }
 
     public function logout()
@@ -27,7 +56,7 @@ class AuthController {
             session_destroy ();
         }
     
-        // On redirige le visiteur vers la page d'accueil
+        // On redirige le visiteur vers la page de connexion
         header ('location:index.php');
     }
 }

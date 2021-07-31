@@ -1,5 +1,5 @@
 <?php ob_start() ?>
-
+<h2 class="title">Se connecter</h2>
 <form class="w-25 m-auto p-4" method="POST" action="index.php?action=login">
   <div class="mb-3">
     <label for="email" class="form-label">Email address</label>
@@ -15,7 +15,7 @@
 
 
 <?php 
-var_dump(DB_PWD);
+
 $content = ob_get_clean() ?>
 
 <?php require('layout.php') ?>

@@ -7,8 +7,8 @@ define('DB_HOST', '127.0.0.1');
 define('DB_USER', 'root');
 define('DB_PWD', 'secret');
 
-$auth = new AuthController();
 $movies = new MovieController();
+$auth = new AuthController();
 
 if(empty($_GET['action']))
 {
@@ -21,4 +21,8 @@ else if ($_GET['action'] === 'login')
 else if ($_GET['action'] === 'movies')
 {
     $movies -> index();
+}
+else if ($_GET['action'] === 'register')
+{
+    $auth -> create($_POST);
 }

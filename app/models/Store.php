@@ -1,11 +1,10 @@
 <?php
 require_once('Model.php');
-
-class Movie extends Model
+class Store extends Model
 {
-    protected $table = 'film';
+    protected $table = 'store';
     
-    // public function all()
+    // public function all ()
     // {
     //     return parent::all();
     // }
