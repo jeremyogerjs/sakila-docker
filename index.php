@@ -10,19 +10,33 @@ define('DB_PWD', 'secret');
 $movies = new MovieController();
 $auth = new AuthController();
 
-if(empty($_GET['action']))
+if(empty($_GET['target']))
 {
     require('./views/login.php');
 }
-else if ($_GET['action'] === 'login')
+else if ($_GET['target'] === 'login')
 {
     $auth -> store($_POST);
 }
-else if ($_GET['action'] === 'movies')
+else if ($_GET['target'] === 'films')
 {
+    if(isset($_GET['store']))
+    {
+        if(!empty($_POST))
+        {
+            $movies ->search();
+            die();
+        }
+        $movies -> show();
+        die();
+    }
     $movies -> index();
 }
-else if ($_GET['action'] === 'register')
+else if ($_GET['target'] === 'logout')
 {
-    $auth -> create($_POST);
+    $auth -> logout();
+}
+else if ($_GET['target'] === 'dashboard')
+{
+    require('./views/dashboard.php');
 }

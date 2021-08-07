@@ -1,7 +1,7 @@
 <?php ob_start() ?>
 
 <h2 class="title">S'enregistrer</h2>
-    <form class="w-25 m-auto p-4" method="POST" action="index.php?action=register">
+    <form class="w-25 m-auto p-4" method="POST" action="index.php?target=register">
     <div class="mb-3">
         <label for="firstName" class="form-label">first Name</label>
         <input type="text" name="firstName" class="form-control" id="firstName" aria-describedby="firstNameHelp">

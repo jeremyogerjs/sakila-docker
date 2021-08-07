@@ -4,8 +4,8 @@ class Adress extends Model
 {
     protected $table = 'address';
     
-    // public function all ()
-    // {
-    //     return parent::all();
-    // }
+    public function all ()
+    {
+        return parent::all();
+    }
 }

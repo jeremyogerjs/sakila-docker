@@ -7,7 +7,7 @@ class User extends Model {
     protected $email;
     protected $password;
 
-    //data for profil and register
+    //data for profil
     protected $firstName;
     protected $lastName;
     protected $addrese;
@@ -16,6 +16,7 @@ class User extends Model {
     protected $active;
     protected $username;
 
+    protected $table = 'staff';
 
     public function __construct(array $data)
     {
@@ -24,26 +25,6 @@ class User extends Model {
         {
             $this -> $key = $value;
         }
-    }
-    public function create()
-    {
-        $sql = 'INSERT INTO staff 
-        (first_name,last_name,address_id,email,store_id,username,password)
-        VALUES (:first_name,:last_name,:address_id,:email,:store_id,:username,:password);';
-
-        $res = $this -> db -> getPDO() -> prepare($sql);
-
-        $res -> execute([
-            ':first_name' => $this -> firstName,
-            ':last_name' => $this -> lastName,
-            ':address_id' => $this -> addrese,
-            ':email' => $this -> email,
-            ':store_id' => $this -> store,
-            ':username' => $this -> username,
-            ':password' => md5($this -> password) //a tester
-        ]); 
-
-
     }
     public function auth()
     {
@@ -55,22 +36,21 @@ class User extends Model {
         {
 
             $res = $this -> db -> getPDO() -> prepare($query);
+
             $res->execute($values);
-    
+
             $row = $res->fetch();
- 
+
             $isPasswordCorrect = password_verify($this -> password, $row -> password);
             
-            var_dump($isPasswordCorrect);
-            die();
+
             if($isPasswordCorrect) {
     
                 //start session
                 session_start ();
     
-                // on enregistre les paramètres de notre visiteur comme variables de session ($login et $password) 
+                // on enregistre les paramètres de notre visiteur comme variables de session ($nom d'utilisateur) 
                 $_SESSION['username'] = $row -> first_name;
-                $_SESSION['password'] = $_POST['password'];
     
                 return true;
             }

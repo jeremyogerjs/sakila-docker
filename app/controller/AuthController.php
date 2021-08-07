@@ -18,29 +18,12 @@ class AuthController {
         
         if(!$login)
         {
+            $error = 'Email ou mot de passe incorrect';
             require('./views/login.php');
         }
         else
         {
-            require('./views/dashboard.php');
-        }
-    }
-    public function create(array $data)
-    {
-        if($_SERVER['REQUEST_METHOD'] === 'POST')
-        {
-            $user = new User($data);
-            $user -> create();
-            require('./views/login.php');
-        }
-        else
-        {
-            $adress = new Adress();
-            $address = $adress -> all();
-            
-            $store = new Store();
-            $stores = $store -> all();
-            require('./views/register.php');
+            header('location:index.php?target=dashboard');
         }
     }
 

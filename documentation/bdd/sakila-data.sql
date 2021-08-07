@@ -46434,6 +46434,9 @@ INSERT INTO `staff` VALUES (1,'Mike','Hillyer',3,0x89504E470D0A1A0A0000000D49484
 UNLOCK TABLES;
 COMMIT;
 
+INSERT INTO staff 
+VALUES
+(4,'john','Doe',20,NULL,'admin@admin.com',2,1,'admin',md5('admin'),'2021-07-15 03:57:16');
 --
 -- Dumping data for table store
 --

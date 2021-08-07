@@ -10,43 +10,46 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php?action=movies">Navbar</a>
+    <a class="navbar-brand" href="index.php">SAKILA</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <?php if(empty($_SESSION)) : ?>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.php">Login</a>
+          </li>
+        
+        <?php else :?>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+          <a class="nav-link" href="index.php?target=logout" tabindex="-1">Se déconnecter</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index.php?action=register" tabindex="-1">register</a>
-        </li>
+        <?php endif; ?>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+
     </div>
   </div>
 </nav>
-    
+<div class="row">
+  <div class="col-3">
+    <?php if(!empty($_SESSION)) : ?>
+      <div class="list-group m-3">
+        <a href="index.php?target=dashboard" class="list-group-item list-group-item-action" aria-current="true">
+          Mon profil
+        </a>
+        <a href="index.php?target=films" class="list-group-item list-group-item-action">Les films</a>
+        <a href="index.php?target=locations" class="list-group-item list-group-item-action">Les locations</a>
+        <a href="index.php?target=clients" class="list-group-item list-group-item-action">Les clients</a>
+      </div>
+    <?php endif ?>
+  </div>
 
+  <div class="col">
     <?= $content ?>
+  </div>
+</div>
+
 
     <footer class="bg-secondary p-3">
         <p class="text-center">copyright @Sakila DevWeb DE</p>

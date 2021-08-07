@@ -22,4 +22,14 @@ class Model {
 
         return $data = $res -> fetchAll();
     }
+
+    public function query(string $query, array $params)
+    {
+        $sql = $query;
+        $res = $this -> db -> getPDO() -> prepare($sql);
+
+        $res ->execute($params);
+
+        return $data = $res -> fetchAll();
+    }
 }

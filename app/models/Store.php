@@ -4,8 +4,8 @@ class Store extends Model
 {
     protected $table = 'store';
     
-    // public function all ()
-    // {
-    //     return parent::all();
-    // }
+    public function all ()
+    {
+        return parent::all();
+    }
 }
