@@ -4,7 +4,7 @@ class Store extends Model
 {
     protected $table = 'store';
     
-    public function all ()
+    public function all (array $columns = ['*'] )
     {
         return parent::all();
     }

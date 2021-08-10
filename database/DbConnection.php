@@ -18,7 +18,6 @@ class Database {
 
     public function getPDO(): PDO
     {
-        echo 'connection succes';
         try{
             return $this->pdo = new PDO("mysql:dbname={$this->dbname};host={$this->host}", $this->username, $this->password, [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

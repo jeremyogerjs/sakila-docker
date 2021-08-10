@@ -1,32 +1,33 @@
 <?php
 require('./app/models/User.php');
-require('./app/models/Adress.php');
-require('./app/models/Store.php');
+require_once('./app/controller/Controller.php');
 
-class AuthController {
-
+class AuthController extends Controller 
+{
     public function index()
     {
-        require('../../views/login.php');
+        $this -> render('dashboard');
     }
-
-    public function store(array $data)
+    public function store()
     {
-        $user = new User($data);
+        $user = new User($_POST,$this -> getDB());
 
         $login = $user ->auth();
         
         if(!$login)
         {
             $error = 'Email ou mot de passe incorrect';
-            require('./views/login.php');
+            $this -> render('login');
         }
         else
         {
-            header('location:index.php?target=dashboard');
+            $this -> render('dashboard');
         }
     }
-
+    public function create()
+    {
+        $this -> render('login');
+    }
     public function logout()
     {
         session_start ();
@@ -40,6 +41,6 @@ class AuthController {
         }
     
         // On redirige le visiteur vers la page de connexion
-        header ('location:index.php');
+        $this -> render('login');
     }
 }

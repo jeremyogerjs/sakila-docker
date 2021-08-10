@@ -10,7 +10,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php">SAKILA</a>
+    <a class="navbar-brand" href="<?= empty($_SESSION) ? '' : 'dashboard'  ?>">SAKILA</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -18,12 +18,12 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <?php if(empty($_SESSION)) : ?>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.php">Login</a>
+            <a class="nav-link active" aria-current="page" href="/login">Login</a>
           </li>
         
         <?php else :?>
         <li class="nav-item">
-          <a class="nav-link" href="index.php?target=logout" tabindex="-1">Se déconnecter</a>
+          <a class="nav-link" href="/logout" tabindex="-1">Se déconnecter</a>
         </li>
         <?php endif; ?>
       </ul>
@@ -35,12 +35,12 @@
   <div class="col-3">
     <?php if(!empty($_SESSION)) : ?>
       <div class="list-group m-3">
-        <a href="index.php?target=dashboard" class="list-group-item list-group-item-action" aria-current="true">
+        <a href="dashboard" class="list-group-item list-group-item-action" aria-current="true">
           Mon profil
         </a>
-        <a href="index.php?target=films" class="list-group-item list-group-item-action">Les films</a>
-        <a href="index.php?target=locations" class="list-group-item list-group-item-action">Les locations</a>
-        <a href="index.php?target=clients" class="list-group-item list-group-item-action">Les clients</a>
+        <a href="/films" class="list-group-item list-group-item-action">Les films</a>
+        <a href="/locations" class="list-group-item list-group-item-action">Les locations</a>
+        <a href="/clients" class="list-group-item list-group-item-action">Les clients</a>
       </div>
     <?php endif ?>
   </div>

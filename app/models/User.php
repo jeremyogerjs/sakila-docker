@@ -8,8 +8,8 @@ class User extends Model {
     protected $password;
 
     //data for profil
-    protected $firstName;
-    protected $lastName;
+    public $first_name;
+    protected $last_name;
     protected $addrese;
     protected $picture;
     protected $store;
@@ -18,40 +18,28 @@ class User extends Model {
 
     protected $table = 'staff';
 
-    public function __construct(array $data)
+    public function __construct(array $data = [],Database $db)
     {
-        parent::__construct();
         foreach ($data as $key => $value)
         {
             $this -> $key = $value;
         }
+        parent::__construct($db);
     }
     public function auth()
     {
-        $query = 'SELECT * FROM staff WHERE (email = :email)';
-
-        $values = [':email' => $this -> email];
-
         try 
         {
 
-            $res = $this -> db -> getPDO() -> prepare($query);
-
-            $res->execute($values);
-
-            $row = $res->fetch();
+            $row = $this -> query("SELECT * FROM staff WHERE email = ?",[$this -> email],true);
 
             $isPasswordCorrect = password_verify($this -> password, $row -> password);
-            
 
-            if($isPasswordCorrect) {
-    
-                //start session
-                session_start ();
-    
+            if($isPasswordCorrect) {   
+
                 // on enregistre les paramètres de notre visiteur comme variables de session ($nom d'utilisateur) 
-                $_SESSION['username'] = $row -> first_name;
-    
+                $this -> first_name = $row -> first_name;
+                $_SESSION['username'] = $this -> first_name;               
                 return true;
             }
             else

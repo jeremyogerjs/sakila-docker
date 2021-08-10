@@ -1,19 +1,13 @@
-<h3 class="title text-center">Location pour le film : <?= $params['rentals'][0] -> title ?></h3>
 
+<h3 class="text-center">Toute les locations</h3>
 
-<div class="card col-4">
-    <div class="card-header">
-        <p class="card-text">Prix de la location <?= $params['rentals'][0] -> rental_rate ?> $</p>
-    </div>
-</div>
 
 <table class="table w-75 mx-auto">
   <thead>
     <tr>
       <th scope="col">Date de location</th>
-      <th scope="col">Louer par</th>
-      <th scope="col">Email contact</th>
-      <th scope="col">Pris en charge par</th>
+      <th scope="col">Nom prénon du loueur</th>
+      <th scope="col">Nom prénom du staff</th>
       <th scope="col">Actions</th>
 
     </tr>
@@ -24,12 +18,11 @@
           <tr>
               <td ><?= $rental->rental_date ?></td>
               <td ><?= $rental->customerFirstName ?> <?= $rental->customerLastName ?></td>
-              <td ><?= $rental->email ?> </td>
               <td ><?= $rental->first_name ?> <?= $rental->last_name ?></td>
               <td >
-                <a href="/customer/<?= $rental ->customer_id ?>">
+                <a href="/locations/<?= $rental ->rental_id ?>">
                 <button class="btn btn-outline-success">
-                  Voir client
+                  Voir
                 </button>
                 </a>
               </td>
@@ -43,3 +36,4 @@
       <?php endif ?>
   </tbody>
 </table>
+

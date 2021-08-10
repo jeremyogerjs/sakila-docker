@@ -1,11 +1,10 @@
-<?php ob_start() ?>
 <h2 class="title">Se connecter</h2>
 <?php if(isset($error)) : ?>
   <div class="alert alert-danger" role="alert">
     <?= $error ?>
   </div>
 <?php endif ?>
-<form class="w-25 m-auto p-4" method="POST" action="index.php?target=login">
+<form class="w-25 m-auto p-4" method="POST" action="login">
   <div class="mb-3">
     <label for="email" class="form-label">Email address</label>
     <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
@@ -17,10 +16,3 @@
   </div>
   <button type="submit" class="btn btn-primary">Se connecter</button>
 </form>
-
-
-<?php 
-
-$content = ob_get_clean() ?>
-
-<?php require('layout.php') ?>
