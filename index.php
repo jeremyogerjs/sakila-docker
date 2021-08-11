@@ -9,13 +9,16 @@ $router = new Router($_SERVER['REQUEST_URI']);
 
 
 // page connexion default
-$router -> get('','AuthController@login');
+$router -> get('','AuthController@index');
+
+// create user for test
+$router -> get('create','AuthController@createAdmin');
 
 // auth user
-$router -> get('login','AuthController@create');
+$router -> get('login','AuthController@index');
 $router -> post('login','AuthController@store');
 $router -> get('logout','AuthController@logout');
-$router -> get('dashboard','AuthController@index');
+$router -> get('dashboard','AuthController@welcome');
 
 // movies
 $router -> get('films','MovieController@index');

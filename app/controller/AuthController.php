@@ -4,7 +4,7 @@ require_once('./app/controller/Controller.php');
 
 class AuthController extends Controller 
 {
-    public function index()
+    public function welcome()
     {
         $this -> render('dashboard');
     }
@@ -24,7 +24,7 @@ class AuthController extends Controller
             $this -> render('dashboard');
         }
     }
-    public function create()
+    public function index()
     {
         $this -> render('login');
     }
@@ -42,5 +42,16 @@ class AuthController extends Controller
     
         // On redirige le visiteur vers la page de connexion
         $this -> render('login');
+    }
+
+    /**
+     * create new user in database for test
+     * setup your account in user model store method
+     */
+    public function createAdmin()
+    {
+        $user = new User([],$this -> getDB());
+
+        $user ->store();
     }
 }

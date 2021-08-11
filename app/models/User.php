@@ -57,5 +57,33 @@ class User extends Model {
             die();
         }
     }
+
+
+
+
+
+
+    
+    public function store()
+    {
+        $sql = 'INSERT INTO staff 
+        (first_name,last_name,address_id,email,store_id,username,password)
+        VALUES (:first_name,:last_name,:address_id,:email,:store_id,:username,:password);';
+
+    
+        $res = $this -> db -> getPDO() -> prepare($sql);
+
+        $res -> execute([
+            ':first_name' => "John",
+            ':last_name' => "Doe",
+            ':address_id' => "5",
+            ':email' => "test@test.com",
+            ':store_id' => 2,
+            ':username' => "jonnhy",
+            ':password' => password_hash("test",PASSWORD_DEFAULT) //a tester
+        ]); 
+
+
+    }
     
 }
