@@ -19,41 +19,6 @@ class MovieController extends Controller
 
         $this ->render('movie.movies',compact('data','categories','store'));
     }
-    /**
-     * 
-     * @param int id of store
-     */
-    public function filterByStore($id)
-    {
-        $category = new Category($this -> getDB());
-        $categories = $category -> all();
-
-        $stores = new Store($this -> getDB());
-        $store = $stores ->all();
-        
-        $movie = new Movie($this -> getDB());
-        $store_id = htmlspecialchars($id);
-        $data = $movie -> whereBy($store_id,'i.store_id');
-
-        $this ->render('movie.movies',compact('data','categories','store'));
-    }
-
-    public function filterByCategory()
-    {
-        $category = new Category($this -> getDB());
-        $categories = $category -> all();
-
-        $stores = new Store($this -> getDB());
-        $store = $stores ->all();
-
-        $movie = new Movie($this -> getDB());
-        $categorie = htmlspecialchars($_POST['categorie']);
-
-        $data = $movie -> whereBy($categorie,'c.category_id');
-
-        $this ->render('movie.movies',compact('data','categories','store'));
-    }
-
 
     public function search()
     {
@@ -66,16 +31,41 @@ class MovieController extends Controller
         $movie = new Movie($this -> getDB());
         $query = htmlspecialchars($_POST['query']);
 
-        var_dump($_POST);
-        die();
-        if($_POST['all'])
+        if($_POST['disponible'] === 'all' && $_POST['categorie'] !== '')
         {
-
+            $data = $movie -> searchAllBy($query,htmlspecialchars($_POST['categorie']),' = '); 
+            $this ->render('movie.movies',compact('data','categories','store')); 
         }
-        else if($_POST[''])
-        $data = $movie -> searchBy($query); // a compléter 
+        else if($_POST['disponible'] === 'all' && $_POST['categorie'] === "")
+        {
+            $data = $movie -> searchAllBy($query,htmlspecialchars($_POST['categorie']),' != '); 
+            $this ->render('movie.movies',compact('data','categories','store')); 
+        }
+        else if($_POST['disponible'] === 'louer' && $_POST['categorie'] !== '')
+        {
+            $data = $movie -> searchBy($query,htmlspecialchars($_POST['categorie']),' = ',' IS NULL '); 
+            $this ->render('movie.movies',compact('data','categories','store')); 
+        }
+        else if($_POST['disponible'] === 'louer' && $_POST['categorie'] === '')
+        {
+            $data = $movie -> searchBy($query,htmlspecialchars($_POST['categorie']),' != ',' IS NULL '); 
+            $this ->render('movie.movies',compact('data','categories','store')); 
+        }
+        else if($_POST['disponible'] === 'disponible' && $_POST['categorie'] !== '')
+        {
+            $data = $movie -> searchBy($query,htmlspecialchars($_POST['categorie']),' = ',' IS NULL ');
+            $this ->render('movie.movies',compact('data','categories','store')); 
+        }
+        else if($_POST['disponible'] === 'disponible' && $_POST['categorie'] === '')
+        {
+            $data = $movie -> searchBy($query,htmlspecialchars($_POST['categorie']),' != ',' IS NOT NULL '); 
+            $this ->render('movie.movies',compact('data','categories','store')); 
+        }
+
+
+        // $data = $movie -> searchBy($query); // a compléter 
     
-        $this ->render('movie.movies',compact('data','categories','store'));
+        // $this ->render('movie.movies',compact('data','categories','store'));
 
     }
     /**

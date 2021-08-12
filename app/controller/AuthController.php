@@ -24,7 +24,7 @@ class AuthController extends Controller
         }
         else
         {
-            $this -> render('dashboard');
+            header('Location: /dashboard');
         }
     }
     public function index()
@@ -33,11 +33,13 @@ class AuthController extends Controller
         {
             $this -> render('user.login');
         }
-        $this -> render('user.dashboard');
+        else{
+            header('Location: /dashboard');
+        }
     }
     public function logout()
     {
-        session_start ();
+        
         // On démarre la session
     
         // On détruit les variables de notre session

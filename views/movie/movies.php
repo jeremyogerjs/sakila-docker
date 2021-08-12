@@ -1,24 +1,24 @@
   <div class="mx-auto  p-3">
     <form class="d-flex flex-column mx-auto" method="POST" action="/films/search">
-      <div class="d-flex w-25 mx-auto">
-        <input class="form-control me-2 " name="query" type="search" placeholder="Rechercher par titre" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+      <div class="d-flex w-50 mx-auto">
+        <input class="form-control me-2 " name="query" type="search" placeholder="Renseigner le titre" aria-label="Search">
+        <button class="btn btn-warning" type="submit">Search</button>
       </div>
       <div class="d-flex mx-auto my-2 align-items-center">
         <div class="form-check me-4">
-          <input class="form-check-input" type="radio" name="disponible" id="all">
+          <input class="form-check-input" type="radio" value="all" name="disponible" id="all" checked>
           <label class="form-check-label" for="all">
             Tous
           </label>
         </div>
         <div class="form-check me-4">
-          <input class="form-check-input" type="radio" name="disponible" id="indisponible">
+          <input class="form-check-input" type="radio" value="louer" name="disponible" id="indisponible">
           <label class="form-check-label" for="indisponible">
             Loué
           </label>
         </div>
         <div class="form-check me-4">
-          <input class="form-check-input" type="radio" name="disponible" id="disponible">
+          <input class="form-check-input" type="radio" value="disponible" name="disponible" id="disponible">
           <label class="form-check-label" for="disponible">
             Disponible
           </label>
@@ -33,13 +33,15 @@
     </form>
   </div>
 
-<table class="table w-75 mx-auto">
-  <thead>
-    <tr>
+<table class="table  mx-auto caption-top table-hover">
+<caption>Liste des films</caption>
+  <thead class="table-dark">
+    <tr class="text-center">
       <th scope="col">Titre</th>
       <th scope="col">Catégorie</th>
       <th scope="col">Durée</th>
-      <th scope="col">Coût de remplacement</th>
+      <th scope="col">Disponible</th>
+      <th scope="col">magasin nº</th>
       <th scope="col">Prix</th>
       <th scope="col">Actions</th>
     </tr>
@@ -47,21 +49,17 @@
   <tbody>
     <?php if(!empty($params['data'])) : ?>
       <?php foreach($params['data'] as $movies) : ?>
-          <tr>
+          <tr class="text-center">
               <td ><?= $movies->title ?></td>
               <td ><?= $movies->name ?></td>
               <td ><?= $movies->length ?> min</td>
-              <td ><?= $movies->replacement_cost ?></td>
+              <td ><?= $movies->return_date != NULL ? 'Disponible' : 'Indisponible' ?></td>
+              <td ><?= $movies->store_id ?></td>
               <td ><?= $movies->rental_rate ?> $</td>
-              <td >
-                <a href="/films/<?= $movies ->film_id ?>">
-                  <button class="btn btn-outline-success">
+              <td class="d-flex justify-content-around">
+                <a href="/films/<?= $movies ->inventory_id ?>" class="text-decoration-none">
+                  <button class="btn btn-primary">
                     Voir
-                  </button>
-                </a>
-                <a href="/locations/<?= $movies ->film_id ?>">
-                  <button class="btn btn-outline-success">
-                    Locations
                   </button>
                 </a>
               </td>

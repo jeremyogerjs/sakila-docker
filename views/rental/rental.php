@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<table class="table w-75 mx-auto">
+<table class="table mx-auto">
   <thead>
     <tr>
       <th scope="col">Date de location</th>
@@ -27,10 +27,10 @@
               <td ><?= $rental->email ?> </td>
               <td ><?= $rental->first_name ?> <?= $rental->last_name ?></td>
               <td >
-                <a href="/customer/<?= $rental ->customer_id ?>">
-                <button class="btn btn-outline-success">
-                  Voir client
-                </button>
+                <a href="/clients/<?= $rental ->customer_id ?>" class="text-decoration-none">
+                  <button class="btn btn-outline-success">
+                    Voir client
+                  </button>
                 </a>
               </td>
           </tr>

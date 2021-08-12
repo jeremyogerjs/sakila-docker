@@ -39,7 +39,7 @@ class Rental extends Model
         LEFT JOIN customer AS c ON r.customer_id = c.customer_id
         LEFT JOIN staff AS s ON r.staff_id = s.staff_id
         LEFT JOIN film AS f ON i.film_id = f.film_id
-        WHERE $column = ? ORDER BY rental_date DESC",[$id],$single);
+        WHERE $column ? ORDER BY rental_date DESC",[$id],$single);
     }
     public function store()
     {

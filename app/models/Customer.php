@@ -26,8 +26,13 @@ class Customer extends Model{
         WHERE c.customer_id = ?",[$id],true);
     }
 
-    public function search($query)
+    public function search(array $query)
     {
-        return $this ->query("SELECT * FROM customer WHERE lower(first_name) OR lower(last_name) LIKE lower(?)",["%$query%"],false);
+        return $this ->query("SELECT c.first_name,c.last_name,c.email, a.address,a.district,a.postal_code,a.phone,ct.city,cn.country
+        FROM customer AS c 
+        LEFT JOIN address AS a ON c.address_id = a.address_id
+        LEFT JOIN city AS ct ON a.city_id = ct.city_id
+        LEFT JOIN country AS cn ON ct.country_id = cn.country_id
+        WHERE lower(c.first_name) LIKE lower(?) OR lower(c.last_name) LIKE lower(?)",$query,false);
     }
 }

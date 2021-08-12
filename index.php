@@ -24,8 +24,6 @@ $router -> get('dashboard','AuthController@welcome');
 $router -> get('films','MovieController@index');
 $router -> post('films/search','MovieController@search');
 $router -> get('films/:id','MovieController@show');
-$router -> get('films/categories','MovieController@filterByCategory');
-$router -> get('films/store/:id','MovieController@filterByStore');
 
 // rental
 $router -> get('locations','RentalController@index');
@@ -36,7 +34,7 @@ $router -> post('films/:id/location','RentalController@store');
 // customer
 $router -> get('clients','CustomerController@index');
 $router -> get('clients/:id','CustomerController@show');
-$router -> post('clients/search','CustomerController@find');
+$router -> post('clients/search','CustomerController@search');
 
 
 //running router

@@ -21,12 +21,12 @@ class CustomerController extends Controller
         $this -> render('customer.customer',compact('data'));
     }
 
-    public function find()
+    public function search()
     {
         $customer = new Customer($this -> getDB());
-        $query = htmlspecialchars($_POST['query']);
+        $query = '%'. htmlspecialchars($_POST['query']).'%';
 
-        $data = $customer -> search($query);
+        $data = $customer -> search([$query,$query]);
 
         $this -> render('customer.customers',compact('data'));
     }

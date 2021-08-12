@@ -20,9 +20,17 @@ class RentalController extends Controller
     public function show($id)
     {
         $rental = new Rental([],$this -> getDB());
-        $rentals = $rental -> findBy($id,"f.film_id",false);
+        $rentals = $rental -> findBy($id,"r.rental_id = ",false);
 
         $this -> render('rental.rental',compact('rentals'));
+    }
+    public function edit($id)
+    {
+        // $rental = new Rental($_POST,$this ->getDB());
+
+        // $rental -> update($id);
+
+        // header("Location:/location");
     }
     /**
      * 

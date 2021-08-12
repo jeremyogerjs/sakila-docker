@@ -8,7 +8,7 @@
     <title>Sakila</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-danger">
   <div class="container-fluid">
     <a class="navbar-brand" href="<?= empty($_SESSION) ? '' : 'dashboard'  ?>">SAKILA</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,22 +31,24 @@
     </div>
   </div>
 </nav>
-<div class="row columns">
-  <div class="col-3">
-    <?php if(!empty($_SESSION)) : ?>
-      <div class="list-group m-3">
-        <a href="dashboard" class="list-group-item list-group-item-action" aria-current="true">
-          Mon profil
-        </a>
-        <a href="/films" class="list-group-item list-group-item-action">Les films</a>
-        <a href="/locations" class="list-group-item list-group-item-action">Les locations</a>
-        <a href="/clients" class="list-group-item list-group-item-action">Les clients</a>
-      </div>
-    <?php endif ?>
-  </div>
-
-  <div class="col">
-    <?= $content ?>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <?php if(!empty($_SESSION)) : ?>
+        <div class="list-group m-3">
+          <a href="/dashboard" class="list-group-item list-group-item-danger list-group-item-action">
+            Mon profil
+          </a>
+          <a href="/films" class="list-group-item list-group-item-action list-group-item-danger">Les films</a>
+          <a href="/locations" class="list-group-item list-group-item-action list-group-item-danger">Les locations</a>
+          <a href="/clients" class="list-group-item list-group-item-action list-group-item-danger">Les clients</a>
+        </div>
+      <?php endif ?>
+    </div>
+  
+    <div class="col">
+      <?= $content ?>
+    </div>
   </div>
 </div>
 
