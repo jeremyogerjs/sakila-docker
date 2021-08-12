@@ -31,7 +31,7 @@
     </div>
   </div>
 </nav>
-<div class="row">
+<div class="row columns">
   <div class="col-3">
     <?php if(!empty($_SESSION)) : ?>
       <div class="list-group m-3">

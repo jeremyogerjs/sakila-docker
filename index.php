@@ -12,7 +12,7 @@ $router = new Router($_SERVER['REQUEST_URI']);
 $router -> get('','AuthController@index');
 
 // create user for test
-$router -> get('create','AuthController@createAdmin');
+$router -> get('admin','AuthController@createAdmin');
 
 // auth user
 $router -> get('login','AuthController@index');
@@ -33,78 +33,11 @@ $router -> get('locations/:id','RentalController@show');
 $router -> get('films/:id/location','RentalController@create');
 $router -> post('films/:id/location','RentalController@store');
 
+// customer
+$router -> get('clients','CustomerController@index');
+$router -> get('clients/:id','CustomerController@show');
+$router -> post('clients/search','CustomerController@find');
+
+
 //running router
 $router->run();
-
-// $movies = new MovieController();
-// $auth = new AuthController();
-// $rental = new RentalController();
-// $category = new CategoryController();
-
-// if(empty($_GET['target']))
-// {
-//     require('./views/login.php');
-// }
-// else 
-// {
-//     if ($_GET['target'] === 'login')
-//     {
-//         $auth -> store($_POST);
-//     }
-//     // else if ($_GET['target'] === 'films')
-//     // {
-//     //     if(isset($_GET['action']))
-//     //     {
-//     //         if($_GET['action'] === 'search')
-//     //         {
-//     //             $movies ->search();
-//     //         }
-//     //         else if ($_GET['action'] === 'categorie')
-//     //         {
-//     //             $movies -> filterByCategory();
-//     //         }
-//     //         else if($_GET['action'] === 'single')
-//     //         {
-//     //             $movies -> show();
-//     //         }
-//     //         else if ($_GET['action'] === 'store' )
-//     //         {
-//     //             $movies -> filterByStore();
-//     //         }
-//     //         else if ($_GET['action'] === 'location')
-//     //         {
-//     //             $rental ->create();
-//     //         }
-//     //     }
-//     //     else
-//     //     {
-//     //         $movies -> index();
-//     //     }
-//     // }
-//     // else if($_GET['target'] === 'location')
-//     // {
-//     //     if(isset($_GET['action']))
-//     //     {
-//     //         if($_GET['action'] === 'create')
-//     //         {
-//     //             $rental ->create();
-//     //         }
-//     //         else if($_GET['action'] === 'store')
-//     //         {
-//     //             $rental -> store();
-//     //         }
-//     //     }
-//     // }
-//     else if ($_GET['target'] === 'test')
-//     {
-//         $category -> index();
-//     }
-//     else if ($_GET['target'] === 'logout')
-//     {
-//         $auth -> logout();
-//     }
-//     else if ($_GET['target'] === 'dashboard')
-//     {
-//         require('./views/dashboard.php');
-//     }
-// }

@@ -3,6 +3,7 @@ require('./app/models/Movie.php');
 require('./app/models/Category.php');
 require('./app/models/Store.php');
 require_once('./app/controller/Controller.php');
+
 class MovieController extends Controller
 {
     public function index()
@@ -16,7 +17,7 @@ class MovieController extends Controller
         $movie = new Movie($this -> getDB());
         $data = $movie -> all();
 
-        $this ->render('movies',compact('data','categories','store'));
+        $this ->render('movie.movies',compact('data','categories','store'));
     }
     /**
      * 
@@ -34,7 +35,7 @@ class MovieController extends Controller
         $store_id = htmlspecialchars($id);
         $data = $movie -> whereBy($store_id,'i.store_id');
 
-        $this ->render('movies',compact('data','categories','store'));
+        $this ->render('movie.movies',compact('data','categories','store'));
     }
 
     public function filterByCategory()
@@ -50,7 +51,7 @@ class MovieController extends Controller
 
         $data = $movie -> whereBy($categorie,'c.category_id');
 
-        $this ->render('movies',compact('data','categories','store'));
+        $this ->render('movie.movies',compact('data','categories','store'));
     }
 
 
@@ -65,9 +66,16 @@ class MovieController extends Controller
         $movie = new Movie($this -> getDB());
         $query = htmlspecialchars($_POST['query']);
 
-        $data = $movie -> findBy($query);
+        var_dump($_POST);
+        die();
+        if($_POST['all'])
+        {
+
+        }
+        else if($_POST[''])
+        $data = $movie -> searchBy($query); // a compléter 
     
-        $this ->render('movies',compact('data','categories','store'));
+        $this ->render('movie.movies',compact('data','categories','store'));
 
     }
     /**
@@ -80,6 +88,6 @@ class MovieController extends Controller
 
         $data = $movie -> show($id);
 
-        $this -> render('movie',compact('data'));
+        $this -> render('movie.movie',compact('data'));
     }
 }

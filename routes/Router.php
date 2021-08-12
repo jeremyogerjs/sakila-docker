@@ -16,7 +16,6 @@ class Router extends Route
     // protected $db;
     public function __construct( $url)
     {
-        // $this -> db = $this -> db = new Database(DB_NAME,DB_HOST,DB_USER,DB_PWD);
         $this -> url = trim($url,'/');
     }
 

@@ -15,7 +15,7 @@ class Model {
     /**
      * 
      * 
-     * @return array all elements
+     * @return array results
      * 
      */
     public function all(array $columns= ['*'])
@@ -32,9 +32,10 @@ class Model {
 
     /**
      * 
-     * @param string your SQL request
-     * @param array params for sql request
-     * @return object multiple elements
+     * @param string $query SQL request
+     * @param array $params for sql request
+     * @param bool $single if you want multiple result or single
+     * @return object|array result
      * 
      */
     public function query(string $query, array $params = [],bool $single)
@@ -43,8 +44,7 @@ class Model {
         $res = $this -> db -> getPDO() -> prepare($sql);
 
         $res ->execute($params);
-
-
+        
         if($single)
         {
             return $res -> fetch();
@@ -53,15 +53,5 @@ class Model {
         {
             return $res -> fetchAll();
         }
-    }
-
-    public function create(string $query, array $params)
-    {
-        $sql = $query;
-        $res = $this -> db -> getPDO() -> prepare($sql);
-
-        $res ->execute($params);
-
-        return $res;
     }
 }

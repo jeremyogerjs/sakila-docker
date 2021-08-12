@@ -11,7 +11,7 @@ class RentalController extends Controller
         $rental = new Rental([],$this -> getDB());
         $rentals = $rental -> all();
 
-        $this -> render('rentals',compact('rentals'));
+        $this -> render('rental.rentals',compact('rentals'));
     }
     /**
      * 
@@ -22,7 +22,7 @@ class RentalController extends Controller
         $rental = new Rental([],$this -> getDB());
         $rentals = $rental -> findBy($id,"f.film_id",false);
 
-        $this -> render('rental',compact('rentals'));
+        $this -> render('rental.rental',compact('rentals'));
     }
     /**
      * 
@@ -38,7 +38,7 @@ class RentalController extends Controller
         $customers = $customer -> all();
         $movie = $movies ->show($id);
 
-        $this -> render('rentalForm',compact('staff','customers','movie'));
+        $this -> render('rental.rentalForm',compact('staff','customers','movie'));
         //renvoie le formulaire vide avec la liste des customer
     }
     /**

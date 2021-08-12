@@ -21,8 +21,8 @@ class Controller
     protected function render(string $file,array $params = null)
     {
         ob_start();
-
-        require(VIEWS . $file . '.php');
+        $path = str_replace('.',DIRECTORY_SEPARATOR,$file);
+        require(VIEWS . $path . '.php');
 
         $content = ob_get_clean();
 

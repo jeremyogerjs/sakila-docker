@@ -6,7 +6,10 @@ class AuthController extends Controller
 {
     public function welcome()
     {
-        $this -> render('dashboard');
+        $user = new User([],$this -> getDB());
+        $data = $user -> findBy($_SESSION['id']);
+        
+        $this -> render('user.dashboard',compact('data'));
     }
     public function store()
     {
@@ -17,7 +20,7 @@ class AuthController extends Controller
         if(!$login)
         {
             $error = 'Email ou mot de passe incorrect';
-            $this -> render('login');
+            $this -> render('user.login');
         }
         else
         {
@@ -26,7 +29,11 @@ class AuthController extends Controller
     }
     public function index()
     {
-        $this -> render('login');
+        if(empty($_SESSION))
+        {
+            $this -> render('user.login');
+        }
+        $this -> render('user.dashboard');
     }
     public function logout()
     {
@@ -41,7 +48,7 @@ class AuthController extends Controller
         }
     
         // On redirige le visiteur vers la page de connexion
-        $this -> render('login');
+        $this -> render('user.login');
     }
 
     /**
