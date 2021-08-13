@@ -71,12 +71,13 @@ class MovieController extends Controller
     /**
      * 
      * @param int id of film
+     * @param int idRental rental_id
      */
-    public function show($id)
+    public function show($id,$idRental)
     {
         $movie = new Movie($this -> getDB());
 
-        $data = $movie -> show($id);
+        $data = $movie -> show($id,$idRental);
 
         $this -> render('movie.movie',compact('data'));
     }

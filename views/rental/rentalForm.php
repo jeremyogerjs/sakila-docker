@@ -1,7 +1,7 @@
 <h3 class="title text-center"> Location pour le film : <?= $params['movie'][0] -> title ?> </h3>
 
 <div class="col-5 card p-3 my-5 mx-auto">
-    <form action="/films/<?= $params['movie'][0] -> film_id ?>/location" method="post">
+    <form action="/film/<?= $params['movie'][0] -> film_id ?>/location" method="post">
         <div class="mb-3">
             <label class="form-label" for="rental_date">Date de location</label>
             <input class="form-control" type="datetime-local" name="rental_date">

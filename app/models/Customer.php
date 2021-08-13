@@ -28,7 +28,7 @@ class Customer extends Model{
 
     public function search(array $query)
     {
-        return $this ->query("SELECT c.first_name,c.last_name,c.email, a.address,a.district,a.postal_code,a.phone,ct.city,cn.country
+        return $this ->query("SELECT c.customer_id,c.first_name,c.last_name,c.email, a.address,a.district,a.postal_code,a.phone,ct.city,cn.country
         FROM customer AS c 
         LEFT JOIN address AS a ON c.address_id = a.address_id
         LEFT JOIN city AS ct ON a.city_id = ct.city_id

@@ -6,19 +6,19 @@
     <div class="form-check me-4">
       <input class="form-check-input" type="radio" value="louer" name="disponible" id="indisponible">
       <label class="form-check-label" for="indisponible">
-        Location en cours
+        en cours
       </label>
     </div>
     <div class="form-check me-4">
       <input class="form-check-input" type="radio" value="louer" name="disponible" id="disponible">
       <label class="form-check-label" for="disponible">
-        Historique des locations
+        Terminé
       </label>
     </div>
     <div class="form-check me-4">
       <input class="form-check-input" type="radio" value="louer" name="disponible" id="all" checked>
       <label class="form-check-label" for="all">
-        Toute les locations
+        Tous
       </label>
     </div>
     <button type="submit" class="btn btn-success">filtrer</button>
@@ -42,7 +42,7 @@
               <td ><?= $rental->customerFirstName ?> <?= $rental->customerLastName ?></td>
               <td ><?= $rental->first_name ?> <?= $rental->last_name ?></td>
               <td >
-                <a href="/locations/<?= $rental ->rental_id ?>" class="text-decoration-none">
+                <a href="/locations/<?= $rental ->customer_id ?>" class="text-decoration-none">
                   <button class="btn btn-outline-success">
                     Voir
                   </button>

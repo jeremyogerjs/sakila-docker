@@ -19,7 +19,7 @@ class Movie extends Model
             GROUP BY i.inventory_id
             LIMIT 20",[],false);
     }
-    public function show($id)
+    public function show($id,$idRental)
     {
         return $this -> query("SELECT f.film_id,f.title, c.name, f.length, 
         f.replacement_cost, f.rental_rate,f.description,
@@ -31,8 +31,8 @@ class Movie extends Model
             LEFT JOIN film_actor AS fa ON fa.film_id = f.film_id
             LEFT JOIN actor AS a ON fa.actor_id = a.actor_id
             LEFT JOIN rental AS r ON r.inventory_id = i.inventory_id 
-        WHERE i.inventory_id = ? 
-        GROUP BY i.inventory_id LIMIT 1",[$id],false);
+        WHERE i.inventory_id = ? AND r.rental_id = ?
+        GROUP BY i.inventory_id",[$id,$idRental],false);
     }
     /**
      * 
@@ -55,7 +55,7 @@ class Movie extends Model
             LEFT JOIN film_category AS fc ON f.film_id = fc.film_id
             LEFT JOIN category AS c ON fc.category_id = c.category_id
             LEFT JOIN rental AS r ON r.inventory_id = i.inventory_id
-        WHERE lower(f.title) LIKE lower(?) AND fc.category_id $operator1 ? AND r.return_date $operator2 
+        WHERE lower(f.title) LIKE lower(?) AND fc.category_id $operator1 ? AND (r.return_date $operator2) 
         GROUP BY i.inventory_id LIMIT 20",["%$query%",$idCategory],false);
     }
 

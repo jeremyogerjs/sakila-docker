@@ -23,18 +23,19 @@ $router -> get('dashboard','AuthController@welcome');
 // movies
 $router -> get('films','MovieController@index');
 $router -> post('films/search','MovieController@search');
-$router -> get('films/:id','MovieController@show');
+$router -> get('films/:id/location/:id','MovieController@show');
 
 // rental
 $router -> get('locations','RentalController@index');
 $router -> get('locations/:id','RentalController@show');
-$router -> get('films/:id/location','RentalController@create');
+$router -> get('location/:id/film/:id','RentalController@create');
 $router -> post('films/:id/location','RentalController@store');
 
 // customer
 $router -> get('clients','CustomerController@index');
 $router -> get('clients/:id','CustomerController@show');
 $router -> post('clients/search','CustomerController@search');
+$router -> get('test/:id/film/:id','CustomerController@test');
 
 
 //running router

@@ -20,7 +20,7 @@ class RentalController extends Controller
     public function show($id)
     {
         $rental = new Rental([],$this -> getDB());
-        $rentals = $rental -> findBy($id,"r.rental_id = ",false);
+        $rentals = $rental -> findBy($id,"c.customer_id = ",false);
 
         $this -> render('rental.rental',compact('rentals'));
     }
@@ -36,7 +36,7 @@ class RentalController extends Controller
      * 
      * @param int id of film
      */
-    public function create($id)
+    public function create($idRental,$id)
     {
         $movies = new Movie($this -> getDB());
         $customer = new Customer($this -> getDB());
@@ -44,7 +44,7 @@ class RentalController extends Controller
 
         $staff = $user -> all();
         $customers = $customer -> all();
-        $movie = $movies ->show($id);
+        $movie = $movies ->show($id,$idRental);
 
         $this -> render('rental.rentalForm',compact('staff','customers','movie'));
         //renvoie le formulaire vide avec la liste des customer

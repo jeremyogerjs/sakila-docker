@@ -28,4 +28,17 @@ class Controller
 
         require(VIEWS . 'layout.php');
     }
+
+    protected function isAuth()
+    {
+        if(isset($_SESSION['username']))
+        {
+            return true;
+        }
+        else
+        {
+            $this ->render('user.login'); 
+        
+        }
+    }
 }

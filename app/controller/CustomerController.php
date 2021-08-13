@@ -7,6 +7,8 @@ class CustomerController extends Controller
 
     public function index()
     {
+        $this -> isAuth();
+        
         $customer = new Customer($this -> getDB());
         $data = $customer -> all();
 

@@ -13,7 +13,6 @@
       <th scope="col">Nom</th>
       <th scope="col">Email</th>
       <th scope="col">Actions</th>
-
     </tr>
   </thead>
   <tbody>

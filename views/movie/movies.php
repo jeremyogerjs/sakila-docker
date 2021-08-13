@@ -57,7 +57,7 @@
               <td ><?= $movies->store_id ?></td>
               <td ><?= $movies->rental_rate ?> $</td>
               <td class="d-flex justify-content-around">
-                <a href="/films/<?= $movies ->inventory_id ?>" class="text-decoration-none">
+                <a href="/films/<?= $movies ->inventory_id ?>/location/<?= $movies ->rental_id ?>" class="text-decoration-none">
                   <button class="btn btn-primary">
                     Voir
                   </button>
