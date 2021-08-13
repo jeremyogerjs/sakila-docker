@@ -41,11 +41,11 @@ class Rental extends Model
     public function findBy($id,string $column, bool $single)
     {
         return $this -> query("SELECT r.rental_id,r.rental_date,r.inventory_id,r.customer_id,r.staff_id,c.first_name as customerFirstName,
-        c.last_name as customerLastName,c.email,s.first_name,s.last_name,f.title,f.rental_rate FROM rental AS r 
-        LEFT JOIN inventory AS i ON r.inventory_id = i.inventory_id
-        LEFT JOIN customer AS c ON r.customer_id = c.customer_id
-        LEFT JOIN staff AS s ON r.staff_id = s.staff_id
-        LEFT JOIN film AS f ON i.film_id = f.film_id
+            c.last_name as customerLastName,c.email,s.first_name,s.last_name,f.title,f.rental_rate FROM rental AS r 
+            LEFT JOIN inventory AS i ON r.inventory_id = i.inventory_id
+            LEFT JOIN customer AS c ON r.customer_id = c.customer_id
+            LEFT JOIN staff AS s ON r.staff_id = s.staff_id
+            LEFT JOIN film AS f ON i.film_id = f.film_id
         WHERE $column ? ORDER BY rental_date DESC",[$id],$single);
     }
     /**
