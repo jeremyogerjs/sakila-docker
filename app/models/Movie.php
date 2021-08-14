@@ -16,8 +16,8 @@ class Movie extends Model
             LEFT JOIN film_category AS fc ON f.film_id = fc.film_id
             LEFT JOIN category AS c ON fc.category_id = c.category_id 
             LEFT JOIN rental AS r ON r.inventory_id = i.inventory_id 
-            GROUP BY i.inventory_id
-            LIMIT 20",[],false);
+        GROUP BY i.inventory_id
+        LIMIT 20",[],false);
     }
     public function show($id,$idRental)
     {
@@ -36,12 +36,10 @@ class Movie extends Model
     }
     /**
      * 
-     * @param string $query value of searchbar
+     * @param string $query value of search bar
      * @param string $idCategory value of category column
      * @param string $operator1 operator for category column
-     * @param string $returnDate value of return Date column
-     * @param string $operator2 operator for return column
-     * 
+     * @param string $operator2 operator AND value for return column e.g(IS NULL)
      * 
      */
     public function searchBy(string $query,string $idCategory,string $operator1,string $operator2)
@@ -58,7 +56,13 @@ class Movie extends Model
         WHERE lower(f.title) LIKE lower(?) AND fc.category_id $operator1 ? AND (r.return_date $operator2) 
         GROUP BY i.inventory_id LIMIT 20",["%$query%",$idCategory],false);
     }
-
+    /**
+     * 
+     * @param string $query value of search bar
+     * @param string $idCategory value of category column
+     * @param string $operator1 operator for category column
+     * 
+     */
     public function searchAllBy(string $query,string $idCategory,string $operator1)
     {
 

@@ -1,48 +1,33 @@
-
 <h3 class="text-center py-3">Toute les locations</h3>
 
-<form action="" method="POST" class="form">
-  <div class="d-flex align-items-center justify-content-center py-2">
-    <div class="form-check me-4">
-      <input class="form-check-input" type="radio" value="louer" name="disponible" id="indisponible">
-      <label class="form-check-label" for="indisponible">
-        en cours
-      </label>
-    </div>
-    <div class="form-check me-4">
-      <input class="form-check-input" type="radio" value="louer" name="disponible" id="disponible">
-      <label class="form-check-label" for="disponible">
-        Terminé
-      </label>
-    </div>
-    <div class="form-check me-4">
-      <input class="form-check-input" type="radio" value="louer" name="disponible" id="all" checked>
-      <label class="form-check-label" for="all">
-        Tous
-      </label>
-    </div>
-    <button type="submit" class="btn btn-success">filtrer</button>
+<form action="/locations/search" method="POST" class="form">
+  <div class="d-flex w-50 mx-auto">
+        <input class="form-control me-2 " name="query" type="search" placeholder="Rechercher par client ou par film" aria-label="Rechercher">
+        <button class="btn btn-outline-primary" type="submit">Rechercher</button>
   </div>
 </form>
-<table class="table w-75 mx-auto">
+<table class="table mx-auto">
   <thead>
     <tr>
       <th scope="col">Date de location</th>
-      <th scope="col">Nom prénon du loueur</th>
-      <th scope="col">Nom prénom du staff</th>
+      <th scope="col">Statut</th>
+      <th scope="col">Louer par</th>
+      <th scope="col">Titre du film</th>
+      <th scope="col">Staff</th>
       <th scope="col">Actions</th>
-
     </tr>
   </thead>
   <tbody>
     <?php if(!empty($params['rentals'])) : ?>
       <?php foreach($params['rentals'] as $rental) : ?>
           <tr>
-              <td ><?= $rental->rental_date ?></td>
+              <td ><?= date('d/m/Y',strtotime($rental->rental_date)) ?></td>
+              <td ><?= isset($rental->return_date) ? 'Terminé'  : 'En cours' ?></td>
               <td ><?= $rental->customerFirstName ?> <?= $rental->customerLastName ?></td>
+              <td ><?= $rental->title ?></td>
               <td ><?= $rental->first_name ?> <?= $rental->last_name ?></td>
               <td >
-                <a href="/locations/<?= $rental ->customer_id ?>" class="text-decoration-none">
+                <a href="/locations/<?= $rental ->rental_id ?>" class="text-decoration-none">
                   <button class="btn btn-outline-success">
                     Voir
                   </button>

@@ -8,9 +8,10 @@ class RentalController extends Controller
 {
     public function index()
     {
+        $this -> isAuth();
+
         $rental = new Rental([],$this -> getDB());
         $rentals = $rental -> all();
-
         $this -> render('rental.rentals',compact('rentals'));
     }
     /**
@@ -19,18 +20,22 @@ class RentalController extends Controller
      */
     public function show($id)
     {
+        $this -> isAuth();
+
         $rental = new Rental([],$this -> getDB());
-        $rentals = $rental -> findBy($id,"c.customer_id = ",false);
+        $rentals = $rental -> findBy($id,"r.rental_id = ",false);
 
         $this -> render('rental.rental',compact('rentals'));
     }
     public function edit($id)
     {
-        // $rental = new Rental($_POST,$this ->getDB());
+        $this -> isAuth();
 
-        // $rental -> update($id);
+        $rental = new Rental([],$this ->getDB());
 
-        // header("Location:/location");
+        $rentals = $rental -> findBy($id,"r.rental_id = ",false);
+
+        $this ->render('rental.endRental',compact('rentals'));
     }
     /**
      * 
@@ -38,6 +43,8 @@ class RentalController extends Controller
      */
     public function create($idRental,$id)
     {
+        $this -> isAuth();
+
         $movies = new Movie($this -> getDB());
         $customer = new Customer($this -> getDB());
         $user = new User([],$this -> getDB());
@@ -46,19 +53,28 @@ class RentalController extends Controller
         $customers = $customer -> all();
         $movie = $movies ->show($id,$idRental);
 
-        $this -> render('rental.rentalForm',compact('staff','customers','movie'));
+        $this -> render('rental.createRental',compact('staff','customers','movie'));
         //renvoie le formulaire vide avec la liste des customer
     }
-    /**
-     * @param string id of film
-     * 
-     */
+
     public function store()
     {
+        $this -> isAuth();
 
         $rental = new Rental($_POST,$this -> getDB());
         $rental -> store();
 
         header("Location:/location");
+    }
+    public function search()
+    {
+        $this -> isAuth();
+        
+        $rental = new Rental([],$this -> getDB());
+        $query = htmlspecialchars($_POST['query']);
+
+        $rentals = $rental -> searchBy($query);
+
+        $this ->render('rental.rentals',compact('rentals'));
     }
 }

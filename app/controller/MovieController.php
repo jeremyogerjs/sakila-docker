@@ -8,6 +8,7 @@ class MovieController extends Controller
 {
     public function index()
     {
+        $this -> isAuth();
         $category = new Category($this -> getDB());
         $categories = $category -> all();
 
@@ -22,6 +23,8 @@ class MovieController extends Controller
 
     public function search()
     {
+        $this -> isAuth();
+
         $category = new Category($this -> getDB());
         $categories = $category -> all();
 
@@ -75,6 +78,8 @@ class MovieController extends Controller
      */
     public function show($id,$idRental)
     {
+        $this -> isAuth();
+        
         $movie = new Movie($this -> getDB());
 
         $data = $movie -> show($id,$idRental);

@@ -1,11 +1,7 @@
 <div class="my-4 d-flex justify-content-around">
     <div class="d-flex flex-column">
-    
-            <a href="/location/<?=$params['data'][0] -> rental_id ?>/film/<?=$params['data'][0] -> inventory_id ?>" class="text-decoration-none <?= isset($params['data'][0] -> return_date) ? '' : 'pe-none'?>">
-                <button class="btn btn-success" <?= isset($params['data'][0] -> return_date) ? '' : 'disabled'?>>Louer <span class=""><?= $params['data'][0] -> rental_rate ?> $</span> </button>
-            </a>
-        <a href="/locations/<?=$params['data'][0] -> rental_id ?>" class="text-decoration-none">
-            <button class="btn btn-primary mt-2">Historique location </button>
+        <a href="/location/<?=$params['data'][0] -> rental_id ?>/film/<?=$params['data'][0] -> inventory_id ?>" class="text-decoration-none <?= isset($params['data'][0] -> return_date) ? '' : 'pe-none'?>">
+            <button class="btn btn-success" <?= isset($params['data'][0] -> return_date) ? '' : 'disabled'?>>Louer <span class=""><?= $params['data'][0] -> rental_rate ?> $</span> </button>
         </a>
     </div>
     <div class="card col-8">

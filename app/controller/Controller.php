@@ -31,14 +31,10 @@ class Controller
 
     protected function isAuth()
     {
-        if(isset($_SESSION['username']))
+        if(!isset($_SESSION['username']))
         {
-            return true;
-        }
-        else
-        {
-            $this ->render('user.login'); 
-        
+            $this ->render('user.login');
+            exit(); 
         }
     }
 }

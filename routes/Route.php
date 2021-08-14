@@ -25,7 +25,7 @@ class Route
         $path = preg_replace('#:([\w]+)#','([^/]+)',$this -> path);
         $pathToMatch = "#^$path$#";
 
-        if (preg_match_all($pathToMatch, $url, $matches)) {
+        if(preg_match_all($pathToMatch, $url, $matches)) {
 
             $this->matches = $matches;
             return true;

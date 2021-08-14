@@ -1,8 +1,8 @@
   <div class="mx-auto  p-3">
     <form class="d-flex flex-column mx-auto" method="POST" action="/films/search">
       <div class="d-flex w-50 mx-auto">
-        <input class="form-control me-2 " name="query" type="search" placeholder="Renseigner le titre" aria-label="Search">
-        <button class="btn btn-warning" type="submit">Search</button>
+        <input class="form-control me-2 " name="query" type="search" placeholder="Renseigner le titre du film" aria-label="Rechercher">
+        <button class="btn btn-warning" type="submit">Rechercher</button>
       </div>
       <div class="d-flex mx-auto my-2 align-items-center">
         <div class="form-check me-4">
@@ -31,6 +31,7 @@
         </select>
       </div>
     </form>
+    <p class="text-muted fst-italic text-center">*Tips : Pour rechercher par catégorie, sélectionner s'en une et appuyer sur le bouton rechercher</p>
   </div>
 
 <table class="table  mx-auto caption-top table-hover">

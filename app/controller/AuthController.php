@@ -39,9 +39,6 @@ class AuthController extends Controller
     }
     public function logout()
     {
-        
-        // On démarre la session
-    
         // On détruit les variables de notre session
         // On détruit notre session
         session_unset ();
@@ -56,6 +53,7 @@ class AuthController extends Controller
     /**
      * create new user in database for test
      * setup your account in user model store method
+     * DELETE THIS IN PRODUCTION
      */
     public function createAdmin()
     {

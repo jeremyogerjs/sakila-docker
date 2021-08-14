@@ -71,14 +71,13 @@ class User extends Model {
 
 
 
-    
+    // create user for test DELETE THIS IN PRODUCTION
     public function store()
     {
         $sql = 'INSERT INTO staff 
         (first_name,last_name,address_id,email,store_id,username,password)
         VALUES (:first_name,:last_name,:address_id,:email,:store_id,:username,:password);';
 
-    
         $res = $this -> db -> getPDO() -> prepare($sql);
 
         $res -> execute([

@@ -16,6 +16,8 @@ class CustomerController extends Controller
     }
     public function show($id)
     {
+        $this -> isAuth();
+
         $customer = new Customer($this -> getDB());
 
         $data = $customer -> findBy($id);
@@ -25,6 +27,8 @@ class CustomerController extends Controller
 
     public function search()
     {
+        $this -> isAuth();
+        
         $customer = new Customer($this -> getDB());
         $query = '%'. htmlspecialchars($_POST['query']).'%';
 

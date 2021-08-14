@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Sakila</title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <nav class="navbar navbar-expand-lg navbar-light bg-danger">
   <div class="container-fluid">
     <a class="navbar-brand" href="<?= empty($_SESSION) ? '' : 'dashboard'  ?>">SAKILA</a>
@@ -31,20 +31,20 @@
     </div>
   </div>
 </nav>
-<div class="container">
+<div class="container flex-grow-1">
   <div class="row">
-    <div class="col-3">
-      <?php if(!empty($_SESSION)) : ?>
+    <?php if(!empty($_SESSION)) : ?>
+      <div class="col-3">
         <div class="list-group m-3">
           <a href="/dashboard" class="list-group-item list-group-item-danger list-group-item-action">
             Mon profil
           </a>
-          <a href="/films" class="list-group-item list-group-item-action list-group-item-danger">Les films</a>
-          <a href="/locations" class="list-group-item list-group-item-action list-group-item-danger">Les locations</a>
-          <a href="/clients" class="list-group-item list-group-item-action list-group-item-danger">Les clients</a>
+          <a href="/films" class="list-group-item list-group-item-action list-group-item-danger">Films</a>
+          <a href="/locations" class="list-group-item list-group-item-action list-group-item-danger">Locations</a>
+          <a href="/clients" class="list-group-item list-group-item-action list-group-item-danger">Clients</a>
         </div>
-      <?php endif ?>
-    </div>
+      </div>
+    <?php endif ?>
   
     <div class="col">
       <?= $content ?>
