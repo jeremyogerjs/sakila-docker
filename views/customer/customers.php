@@ -1,7 +1,7 @@
 <h4 class="title text-center">Liste des clients</h4>
-  <div class="mx-auto col-4 p-3">
+  <div class="mx-auto col-5 p-3">
     <form class="d-flex mx-auto" method="POST" action="/clients/search">
-        <input class="form-control me-2" name="query" type="search" placeholder="Rechercher par nom,prénom" aria-label="Search">
+        <input class="form-control me-2" name="query" type="search" placeholder="Rechercher par nom/prénom" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
   </div>

@@ -69,8 +69,9 @@ class Rental extends Model
             LEFT JOIN film AS f ON i.film_id = f.film_id
         WHERE lower(c.last_name) LIKE lower(?) OR lower(c.first_name) LIKE lower(?) OR lower(f.title) LIKE lower(?) ORDER BY rental_date DESC LIMIT 20",["%$query%","%$query%","%$query%"],false);
     }
-    public function store()
+    public function store($id)
     {
+        $this -> inventory_id = htmlspecialchars($id);
         return $this -> query("INSERT INTO rental (rental_date,inventory_id,customer_id,return_date,staff_id)
         VALUES (?,?,?,?,?);
         ",[$this -> rental_date,$this ->inventory_id,$this -> customer_id,$this -> return_date,$this -> staff_id],true);

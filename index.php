@@ -24,7 +24,6 @@ $router -> post('login','AuthController@store');
 $router -> get('films','MovieController@index');
 $router -> get('films/:id/location/:id','MovieController@show');
 $router -> post('films/search','MovieController@search');
-$router -> post('films/:id/location/:id','MovieController@store');
 
 // rental
 $router -> get('locations','RentalController@index');
@@ -33,7 +32,7 @@ $router -> post('locations/search','RentalController@search');
 
 //create location
 $router -> get('location/:id/film/:id','RentalController@create');
-$router -> post('films/:id/location','RentalController@store');
+$router -> post('film/:id/location','RentalController@store');
 
 // finish location
 $router -> get('locations/:id/edit','RentalController@edit');

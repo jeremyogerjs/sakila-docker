@@ -1,7 +1,7 @@
 <h3 class="title text-center"> Location pour le film : <?= $params['movie'][0] -> title ?> </h3>
 
 <div class="col-5 card p-3 my-5 mx-auto">
-    <form action="/film/<?= $params['movie'][0] -> film_id ?>/location" method="post">
+    <form action="/film/<?= $params['movie'][0] -> inventory_id ?>/location" method="post">
         <div class="mb-3">
             <label class="form-label" for="rental_date">Date de location</label>
             <input class="form-control" type="datetime-local" name="rental_date">
@@ -21,9 +21,6 @@
                     <option value="<?= $item -> staff_id ?>"><?= $item ->first_name ?> <?= $item -> last_name ?></option>
                 <?php endforeach ?>
             </select>
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" hidden name="inventory_id" value="<?= $params['movie'][0] -> inventory_id ?>">
         </div>
         <div class="d-flex justify-content-between">
             <a href="/films/<?= $params['movie'][0] -> film_id ?>">

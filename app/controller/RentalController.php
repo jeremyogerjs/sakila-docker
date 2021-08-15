@@ -54,17 +54,17 @@ class RentalController extends Controller
         $movie = $movies ->show($id,$idRental);
 
         $this -> render('rental.createRental',compact('staff','customers','movie'));
-        //renvoie le formulaire vide avec la liste des customer
+        //renvoie le formulaire vide avec la liste des clients
     }
 
-    public function store()
+    public function store($id)
     {
         $this -> isAuth();
 
         $rental = new Rental($_POST,$this -> getDB());
-        $rental -> store();
+        $rental -> store($id);
 
-        header("Location:/location");
+        header("Location:/locations");
     }
     public function search()
     {

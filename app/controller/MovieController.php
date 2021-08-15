@@ -64,12 +64,6 @@ class MovieController extends Controller
             $data = $movie -> searchBy($query,htmlspecialchars($_POST['categorie']),' != ',' IS NOT NULL '); 
             $this ->render('movie.movies',compact('data','categories','store')); 
         }
-
-
-        // $data = $movie -> searchBy($query); // a compléter 
-    
-        // $this ->render('movie.movies',compact('data','categories','store'));
-
     }
     /**
      * 

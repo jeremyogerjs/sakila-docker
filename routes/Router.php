@@ -13,8 +13,7 @@ class Router extends Route
 {
     protected $url;
     protected $routes = [];
-    // protected $db;
-    public function __construct( $url)
+    public function __construct($url)
     {
         $this -> url = trim($url,'/');
     }
