@@ -2,13 +2,13 @@
 require('./app/models/User.php');
 require_once('./app/controller/Controller.php');
 
-class AuthController extends Controller 
+class AuthController extends Controller
 {
     public function welcome()
     {
         $user = new User([],$this -> getDB());
         $data = $user -> findBy($_SESSION['id']);
-        
+
         $this -> render('user.dashboard',compact('data'));
     }
     public function store()
@@ -16,7 +16,7 @@ class AuthController extends Controller
         $user = new User($_POST,$this -> getDB());
 
         $login = $user ->auth();
-        
+
         if(!$login)
         {
             $error = 'Email ou mot de passe incorrect';
@@ -45,9 +45,10 @@ class AuthController extends Controller
         if(isset($_SESSION)) {
             session_destroy ();
         }
-    
+
         // On redirige le visiteur vers la page de connexion
         $this -> render('user.login');
+        
     }
 
     /**
