@@ -46,11 +46,11 @@ class AuthController extends Controller
             session_destroy ();
         }
 
+
         // On redirige le visiteur vers la page de connexion
         $this -> render('user.login');
-        
-    }
 
+    }
     /**
      * create new user in database for test
      * setup your account in user model store method
