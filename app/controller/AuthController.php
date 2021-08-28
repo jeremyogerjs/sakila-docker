@@ -6,34 +6,29 @@ class AuthController extends Controller
 {
     public function welcome()
     {
-        $user = new User([],$this -> getDB());
-        $data = $user -> findBy($_SESSION['id']);
+        $user = new User([], $this->getDB());
+        $data = $user->findBy($_SESSION['id']);
 
-        $this -> render('user.dashboard',compact('data'));
+        $this->render('user.dashboard', compact('data'));
     }
     public function store()
     {
-        $user = new User($_POST,$this -> getDB());
+        $user = new User($_POST, $this->getDB());
 
-        $login = $user ->auth();
+        $login = $user->auth();
 
-        if(!$login)
-        {
+        if (!$login) {
             $error = 'Email ou mot de passe incorrect';
-            $this -> render('user.login');
-        }
-        else
-        {
+            $this->render('user.login');
+        } else {
             header('Location: /dashboard');
         }
     }
     public function index()
     {
-        if(empty($_SESSION))
-        {
-            $this -> render('user.login');
-        }
-        else{
+        if (empty($_SESSION)) {
+            $this->render('user.login');
+        } else {
             header('Location: /dashboard');
         }
     }
@@ -41,15 +36,14 @@ class AuthController extends Controller
     {
         // On détruit les variables de notre session
         // On détruit notre session
-        session_unset ();
-        if(isset($_SESSION)) {
-            session_destroy ();
+        session_unset();
+        if (isset($_SESSION)) {
+            session_destroy();
         }
 
 
         // On redirige le visiteur vers la page de connexion
-        $this -> render('user.login');
-
+        $this->render('user.login');
     }
     /**
      * create new user in database for test
@@ -58,8 +52,8 @@ class AuthController extends Controller
      */
     public function createAdmin()
     {
-        $user = new User([],$this -> getDB());
+        $user = new User([], $this->getDB());
 
-        $user ->store();
+        $user->store();
     }
 }

@@ -2,34 +2,32 @@
 
 require_once('./database/DbConnection.php');
 
-class Model {
-
+class Model
+{
     protected $table;
     protected $db;
 
     public function __construct(Database $db)
     {
-        $this -> db = $db;
+        $this->db = $db;
     }
-
     /**
      * 
      * 
      * @return array results
      * 
      */
-    public function all(array $columns= ['*'])
+    public function all(array $columns = ['*'])
     {
-        $columns = implode(',',$columns);
-        $sql = "SELECT $columns FROM ". $this -> table;
+        $columns = implode(',', $columns);
+        $sql = "SELECT $columns FROM " . $this->table;
 
-        $res = $this -> db -> getPDO() -> prepare($sql);
+        $res = $this->db->getPDO()->prepare($sql);
 
-        $res ->execute();
+        $res->execute();
 
-        return $res -> fetchAll();
+        return $res->fetchAll();
     }
-
     /**
      * 
      * @param string $query SQL request
@@ -38,20 +36,18 @@ class Model {
      * @return object|array result
      * 
      */
-    public function query(string $query, array $params = [],bool $single)
+    public function query(string $query, array $params = [], bool $single)
     {
-        $sql = $query;
-        $res = $this -> db -> getPDO() -> prepare($sql);
 
-        $res ->execute($params);
-        
-        if($single)
-        {
-            return $res -> fetch();
-        }
-        else
-        {
-            return $res -> fetchAll();
+        $sql = $query;
+        $res = $this->db->getPDO()->prepare($sql);
+
+        $res->execute($params);
+
+        if ($single) {
+            return $res->fetch();
+        } else {
+            return $res->fetchAll();
         }
     }
 }

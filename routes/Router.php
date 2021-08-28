@@ -4,7 +4,7 @@
 define('DB_NAME', 'sakila');
 define('DB_HOST', '127.0.0.1');
 define('DB_USER', 'root');
-define('DB_PWD', 'secret');
+define('DB_PWD', 'secret123');
 
 require_once('./database/DbConnection.php');
 require_once('./routes/Route.php');
@@ -15,13 +15,13 @@ class Router extends Route
     protected $routes = [];
     public function __construct($url)
     {
-        $this -> url = trim($url,'/');
+        $this->url = trim($url, '/');
     }
 
     public function get(string $path, string $action)
     {
-        
-        $this -> routes['GET'][] = new Route($path,$action);
+
+        $this->routes['GET'][] = new Route($path, $action);
     }
     public function post(string $path, string $action)
     {

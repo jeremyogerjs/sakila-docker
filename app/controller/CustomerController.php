@@ -7,33 +7,33 @@ class CustomerController extends Controller
 
     public function index()
     {
-        $this -> isAuth();
-        
-        $customer = new Customer($this -> getDB());
-        $data = $customer -> all();
+        $this->isAuth();
 
-        $this -> render('customer.customers',compact('data'));
+        $customer = new Customer($this->getDB());
+        $data = $customer->all();
+
+        $this->render('customer.customers', compact('data'));
     }
     public function show($id)
     {
-        $this -> isAuth();
+        $this->isAuth();
 
-        $customer = new Customer($this -> getDB());
+        $customer = new Customer($this->getDB());
 
-        $data = $customer -> findBy($id);
+        $data = $customer->findBy($id);
 
-        $this -> render('customer.customer',compact('data'));
+        $this->render('customer.customer', compact('data'));
     }
 
     public function search()
     {
-        $this -> isAuth();
-        
-        $customer = new Customer($this -> getDB());
-        $query = '%'. htmlspecialchars($_POST['query']).'%';
+        $this->isAuth();
 
-        $data = $customer -> search([$query,$query]);
+        $customer = new Customer($this->getDB());
+        $query = '%' . htmlspecialchars($_POST['query']) . '%';
 
-        $this -> render('customer.customers',compact('data'));
+        $data = $customer->search([$query, $query]);
+
+        $this->render('customer.customers', compact('data'));
     }
 }

@@ -1,7 +1,7 @@
 <?php
 require_once('./database/DbConnection.php');
 
-class Controller 
+class Controller
 {
     protected $db;
 
@@ -15,13 +15,13 @@ class Controller
 
     protected function getDB()
     {
-        return $this -> db;
+        return $this->db;
     }
 
-    protected function render(string $file,array $params = null)
+    protected function render(string $file, array $params = null)
     {
         ob_start();
-        $path = str_replace('.',DIRECTORY_SEPARATOR,$file);
+        $path = str_replace('.', DIRECTORY_SEPARATOR, $file);
         require(VIEWS . $path . '.php');
 
         $content = ob_get_clean();
@@ -31,10 +31,9 @@ class Controller
 
     protected function isAuth()
     {
-        if(!isset($_SESSION['username']))
-        {
-            $this ->render('user.login');
-            exit(); 
+        if (!isset($_SESSION['username'])) {
+            $this->render('user.login');
+            exit();
         }
     }
 }

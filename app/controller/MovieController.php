@@ -1,6 +1,7 @@
 <?php
 require('./app/models/Movie.php');
 require('./app/models/Category.php');
+require('./app/models/Actor.php');
 require('./app/models/Store.php');
 require_once('./app/controller/Controller.php');
 
@@ -8,76 +9,52 @@ class MovieController extends Controller
 {
     public function index()
     {
-        $this -> isAuth();
-        $category = new Category($this -> getDB());
-        $categories = $category -> all();
+        $this->isAuth();
+        $category = new Category($this->getDB());
+        $categories = $category->all();
 
-        $stores = new Store($this -> getDB());
-        $store = $stores ->all();
+        $stores = new Store($this->getDB());
+        $store = $stores->all();
 
-        $movie = new Movie($this -> getDB());
-        $data = $movie -> all();
+        $movie = new Movie($this->getDB());
+        $data = $movie->all();
 
-        $this ->render('movie.movies',compact('data','categories','store'));
+        $this->render('movie.movies', compact('data', 'categories', 'store'));
     }
 
     public function search()
     {
-        $this -> isAuth();
+        $this->isAuth();
 
-        $category = new Category($this -> getDB());
-        $categories = $category -> all();
+        $category = new Category($this->getDB());
+        $categories = $category->all();
 
-        $stores = new Store($this -> getDB());
-        $store = $stores ->all();
-
-        $movie = new Movie($this -> getDB());
+        $movie = new Movie($this->getDB());
         $query = htmlspecialchars($_POST['query']);
 
-        if($_POST['disponible'] === 'all' && $_POST['categorie'] !== '')
-        {
-            $data = $movie -> searchAllBy($query,htmlspecialchars($_POST['categorie']),' = '); 
-            $this ->render('movie.movies',compact('data','categories','store')); 
-        }
-        else if($_POST['disponible'] === 'all' && $_POST['categorie'] === "")
-        {
-            $data = $movie -> searchAllBy($query,htmlspecialchars($_POST['categorie']),' != '); 
-            $this ->render('movie.movies',compact('data','categories','store')); 
-        }
-        else if($_POST['disponible'] === 'louer' && $_POST['categorie'] !== '')
-        {
-            $data = $movie -> searchBy($query,htmlspecialchars($_POST['categorie']),' = ',' IS NULL '); 
-            $this ->render('movie.movies',compact('data','categories','store')); 
-        }
-        else if($_POST['disponible'] === 'louer' && $_POST['categorie'] === '')
-        {
-            $data = $movie -> searchBy($query,htmlspecialchars($_POST['categorie']),' != ',' IS NULL '); 
-            $this ->render('movie.movies',compact('data','categories','store')); 
-        }
-        else if($_POST['disponible'] === 'disponible' && $_POST['categorie'] !== '')
-        {
-            $data = $movie -> searchBy($query,htmlspecialchars($_POST['categorie']),' = ',' IS NULL ');
-            $this ->render('movie.movies',compact('data','categories','store')); 
-        }
-        else if($_POST['disponible'] === 'disponible' && $_POST['categorie'] === '')
-        {
-            $data = $movie -> searchBy($query,htmlspecialchars($_POST['categorie']),' != ',' IS NOT NULL '); 
-            $this ->render('movie.movies',compact('data','categories','store')); 
+        if ($_POST['categorie'] !== '') {
+            $data = $movie->searchBy($query, htmlspecialchars($_POST['categorie']), ' = ', '>');
+            $this->render('movie.movies', compact('data', 'categories'));
+        } else if ($_POST['categorie'] === "") {
+            $data = $movie->searchBy($query, htmlspecialchars($_POST['categorie']), ' != ');
+            $this->render('movie.movies', compact('data', 'categories'));
         }
     }
     /**
      * 
      * @param int id of film
-     * @param int idRental rental_id
+     * 
      */
-    public function show($id,$idRental)
+    public function show($id)
     {
-        $this -> isAuth();
-        
-        $movie = new Movie($this -> getDB());
+        $this->isAuth();
 
-        $data = $movie -> show($id,$idRental);
+        $movie = new Movie($this->getDB());
+        $actor = new Actor($this->getDB());
 
-        $this -> render('movie.movie',compact('data'));
+        $data = $movie->show($id);
+        $actors = $actor->findBy($id);
+
+        $this->render('movie.movie', compact('data', 'actors'));
     }
 }

@@ -7,8 +7,8 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categorie = new Category($this -> getDB());
+        $categorie = new Category($this->getDB());
 
-        $categorie ->all(['f.title','c.name']);
+        $categorie->all(['f.title', 'c.name']);
     }
 }

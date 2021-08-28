@@ -17,15 +17,14 @@ class Payment extends Model
 
     public function __construct(array $data = [], $db)
     {
-        foreach($data as $key => $value)
-        {
-            $this ->$key = htmlspecialchars($value);
+        foreach ($data as $key => $value) {
+            $this->$key = htmlspecialchars($value);
         }
         parent::__construct($db);
     }
     public function store()
     {
-        return $this ->query("INSERT INTO $this -> table (customer_id,staff_id,rental_id,amount,payment_date)
-        VALUES (?,?,?,?,?)",[$this ->customer_id,$this ->staff_id,$this ->rental_id,$this ->amount,$this ->payment_date],true);
+        return $this->query("INSERT INTO $this -> table (customer_id,staff_id,rental_id,amount,payment_date)
+        VALUES (?,?,?,?,?)", [$this->customer_id, $this->staff_id, $this->rental_id, $this->amount, $this->payment_date], true);
     }
 }
