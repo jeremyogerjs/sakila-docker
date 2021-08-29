@@ -18,6 +18,15 @@ class Controller
         return $this->db;
     }
 
+    /**
+     * 
+     * return view file in folder views
+     * @param string  $file name of view
+     * @param array|null $params value u want to pass in view
+     * @return view -- your html  
+     * 
+     * 
+     */
     protected function render(string $file, array $params = null)
     {
         ob_start();
@@ -29,6 +38,12 @@ class Controller
         require(VIEWS . 'layout.php');
     }
 
+    /**
+     * 
+     * verify if you are login
+     * 
+     * 
+     */
     protected function isAuth()
     {
         if (!isset($_SESSION['username'])) {

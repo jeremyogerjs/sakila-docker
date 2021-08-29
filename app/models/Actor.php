@@ -11,6 +11,14 @@ class Actor extends Model
         return parent::all();
     }
 
+    /**
+     * 
+     * get actor by id
+     * 
+     * @return array|object
+     * 
+     * 
+     */
     public function findBy($id)
     {
         return $this->query("SELECT a.first_name,a.last_name FROM film_actor as fc LEFT join actor as a on fc.actor_id = a.actor_id WHERE fc.film_id = ?", [$id], false);

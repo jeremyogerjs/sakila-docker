@@ -7,6 +7,14 @@ require_once('./app/controller/Controller.php');
 
 class MovieController extends Controller
 {
+
+    /**
+     * get all movies
+     * 
+     * @return view
+     * 
+     * 
+     */
     public function index()
     {
         $this->isAuth();
@@ -19,6 +27,13 @@ class MovieController extends Controller
         $this->render('movie.movies', compact('data', 'categories'));
     }
 
+    /**
+     * get movie by query
+     * 
+     * @return view
+     * 
+     * 
+     */
     public function search()
     {
         $this->isAuth();
@@ -39,7 +54,10 @@ class MovieController extends Controller
     }
     /**
      * 
+     * get movie by id
+     * 
      * @param int id of film
+     * @return view
      * 
      */
     public function show($id)

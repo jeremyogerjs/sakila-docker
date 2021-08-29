@@ -2,7 +2,6 @@
 require_once('./app/controller/AuthController.php');
 require_once('./app/controller/MovieController.php');
 require_once('./app/controller/RentalController.php');
-require_once('./app/controller/CategoryController.php');
 require_once('./app/controller/CustomerController.php');
 
 require_once('./database/DbConnection.php');
@@ -20,13 +19,13 @@ class Route
         $this->action = $action;
     }
 
+    // verify match with path
     public function matches(string $url)
     {
-        $path = preg_replace('#:([\w]+)#', '([^/]+)', $this->path);
+        $path = preg_replace('#:([\w]+)#', '([^/]+)', $this->path); // regex to replace params (e.g -> :id) with "/" in path
         $pathToMatch = "#^$path$#";
 
-        if (preg_match_all($pathToMatch, $url, $matches)) {
-
+        if (preg_match_all($pathToMatch, $url, $matches)) { // verify if path match with url and path modify
             $this->matches = $matches;
             return true;
         } else {
@@ -37,10 +36,11 @@ class Route
     public function execute()
     {
         $params = explode('@', $this->action);
-        $controller = new $params[0](new Database(DB_NAME, DB_HOST, DB_USER, DB_PWD));
+        $controller = new $params[0](new Database(DB_NAME, DB_HOST, DB_USER, DB_PWD)); // get name of controller and pass connection of db 
 
-        $method = $params[1];
+        $method = $params[1]; // get method of controller after @
 
+        // verify if in path u have 1 or 2 params and call controller with it ps: max 2 paramsin path
         if (isset($this->matches[1])) {
             if (count($this->matches) > 2) {
                 $param = array_merge($this->matches[1], $this->matches[2]);

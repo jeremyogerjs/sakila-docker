@@ -7,7 +7,14 @@ require_once('./app/models/User.php');
 require_once('./app/controller/Controller.php');
 
 class RentalController extends Controller
-{
+{   
+    /**
+     * get all rentals
+     * 
+     * @return view
+     * 
+     * 
+     */
     public function index()
     {
         $this->isAuth();
@@ -17,8 +24,12 @@ class RentalController extends Controller
         $this->render('rental.rentals', compact('rentals'));
     }
     /**
+     * get rental by id
      * 
      * @param int id of rental
+     * @return view
+     * 
+     * 
      */
     public function show($id)
     {
@@ -29,6 +40,14 @@ class RentalController extends Controller
 
         $this->render('rental.rental', compact('rentals'));
     }
+    /**
+     * update rental by id
+     * 
+     * @param int -- id de la location
+     * @return view
+     * 
+     * 
+     */
     public function edit($id)
     {
         $this->isAuth();
@@ -39,6 +58,16 @@ class RentalController extends Controller
 
         $this->render('rental.endRental', compact('rentals'));
     }
+
+    /**
+     * 
+     * update rental by id
+     * 
+     * 
+     * @param int -- id de la location
+     * @return void
+     * 
+     */
     public function update($id)
     {
 
@@ -51,6 +80,8 @@ class RentalController extends Controller
         header("location:/locations");
     }
     /**
+     * render form for create rental
+     * 
      * 
      * @param int id of film
      * @return view of form with data for select
@@ -71,6 +102,15 @@ class RentalController extends Controller
         //renvoie le formulaire vide avec la liste des clients
     }
 
+    /**
+     * save new rental in db and new payment in db
+     * 
+     * 
+     * @param int -- id de la location
+     * @return void 
+     * 
+     * 
+     */
     public function store($id)
     {
         $this->isAuth();
@@ -82,6 +122,7 @@ class RentalController extends Controller
         $movie = $movies ->show($id);
         $amount = $movie[0]->rental_rate;
 
+        //creer le paiement
         $paiment = [
             "staff_id" => intval($_POST['staff_id']),
             "customer_id" => intval($_POST['customer_id']),
@@ -89,11 +130,19 @@ class RentalController extends Controller
             "amount" => floatval($amount),
             "rental_id" => intval($idRental)
         ];
-
+        
         $payment = new Payment($paiment,$this ->getDB());
         $payment->store();
         header("Location:/locations");
     }
+    /**
+     * 
+     * search rental by query
+     * 
+     * @return view
+     * 
+     * 
+     */
     public function search()
     {
         $this->isAuth();

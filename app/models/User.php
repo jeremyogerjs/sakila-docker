@@ -60,6 +60,7 @@ class User extends Model
             LEFT JOIN country AS cn ON c.country_id = cn.country_id
         WHERE s.staff_id = ?', [$id], false);
     }
+    
     // create user for test DELETE THIS IN PRODUCTION
     public function store()
     {

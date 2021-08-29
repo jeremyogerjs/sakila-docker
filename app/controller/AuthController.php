@@ -4,6 +4,11 @@ require_once('./app/controller/Controller.php');
 
 class AuthController extends Controller
 {
+    /**
+     * 
+     * @return view
+     * 
+     */
     public function welcome()
     {
         $user = new User([], $this->getDB());
@@ -11,6 +16,12 @@ class AuthController extends Controller
 
         $this->render('user.dashboard', compact('data'));
     }
+    /**
+     * 
+     * login user
+     * 
+     * 
+     */
     public function store()
     {
         $user = new User($_POST, $this->getDB());
@@ -24,6 +35,13 @@ class AuthController extends Controller
             header('Location: /dashboard');
         }
     }
+    /**
+     * 
+     * check if you are login, first controller call when come in website
+     * @return view
+     * 
+     * 
+     */
     public function index()
     {
         if (empty($_SESSION)) {
@@ -32,6 +50,14 @@ class AuthController extends Controller
             header('Location: /dashboard');
         }
     }
+
+    /**
+     * 
+     * disconnect user
+     * @return view
+     * 
+     * 
+     */
     public function logout()
     {
         // On détruit les variables de notre session

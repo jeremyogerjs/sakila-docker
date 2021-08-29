@@ -17,6 +17,13 @@ class Database
         $this->password = $password;
     }
 
+    /**
+     * 
+     * 
+     * @return PDOStatement 
+     * 
+     * 
+     */
     public function getPDO(): PDO
     {
         try {

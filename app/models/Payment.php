@@ -22,6 +22,14 @@ class Payment extends Model
         }
         parent::__construct($db);
     }
+
+    /**
+     * 
+     * @return bool
+     * 
+     * 
+     * 
+     */
     public function store()
     {
         return $this->query("INSERT INTO payment (customer_id,staff_id,rental_id,amount,payment_date)

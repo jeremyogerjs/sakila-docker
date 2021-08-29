@@ -72,12 +72,12 @@ class Rental extends Model
             LEFT JOIN customer AS c ON r.customer_id = c.customer_id
             LEFT JOIN staff AS s ON r.staff_id = s.staff_id
             LEFT JOIN film AS f ON i.film_id = f.film_id
-        WHERE lower(c.last_name) LIKE lower(?) OR lower(c.first_name) LIKE lower(?) OR lower(f.title) LIKE lower(?) ORDER BY rental_date DESC LIMIT 20", ["%$query%", "%$query%", "%$query%"], false);
+        WHERE concat(lower(c.first_name),' ',lower(c.last_name)) LIKE lower(?) OR lower(f.title) LIKE lower(?) ORDER BY rental_date DESC LIMIT 20", ["%$query%", "%$query%"], false);
     }
     /**
      * 
-     * @param int -- id of movie
-     * @return bool
+     * @param int $id  id of movie
+     * @return int -- id of insert
      * 
      * 
      */
@@ -92,8 +92,8 @@ class Rental extends Model
     /**
      * 
      * 
-     * @param int -- id of rental
-     * @return bool 
+     * @param int $id id of rental
+     * @return int -- id of last rental insert 
      * 
      * 
      */

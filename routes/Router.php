@@ -1,6 +1,6 @@
 <?php
 
-
+//constante config dbconnection
 define('DB_NAME', 'sakila');
 define('DB_HOST', '127.0.0.1');
 define('DB_USER', 'root');
@@ -27,6 +27,11 @@ class Router extends Route
     {
         $this->routes['POST'][] = new Route($path, $action);
     }
+    /**
+     * 
+     * execute router
+     * 
+     */
     public function run()
     {
         foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {

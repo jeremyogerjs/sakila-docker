@@ -14,7 +14,7 @@ class Model
     /**
      * 
      * 
-     * @return array results
+     * @return array|object results
      * 
      */
     public function all(array $columns = ['*'])
