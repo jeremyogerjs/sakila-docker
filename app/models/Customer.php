@@ -24,7 +24,7 @@ class Customer extends Model
         LEFT JOIN address AS a ON c.address_id = a.address_id
         LEFT JOIN city AS ct ON a.city_id = ct.city_id
         LEFT JOIN country AS cn ON ct.country_id = cn.country_id
-        WHERE c.customer_id = ?", [$id], true);
+        WHERE c.customer_id = ?", [$id], false);
     }
 
     public function search(array $query)

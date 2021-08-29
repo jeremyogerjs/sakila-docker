@@ -1,9 +1,9 @@
 <?php
 require_once('./app/controller/AuthController.php');
-require('./app/controller/MovieController.php');
-require('./app/controller/RentalController.php');
-require('./app/controller/CategoryController.php');
-require('./app/controller/CustomerController.php');
+require_once('./app/controller/MovieController.php');
+require_once('./app/controller/RentalController.php');
+require_once('./app/controller/CategoryController.php');
+require_once('./app/controller/CustomerController.php');
 
 require_once('./database/DbConnection.php');
 class Route

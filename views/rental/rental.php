@@ -1,8 +1,13 @@
 <h3 class="title text-center">Location pour le film : <?= $params['rentals'][0]->title ?></h3>
 <div class="d-flex">
-  <a href="/locations/<?= $params['rentals'][0]->rental_id ?>/edit" class="text-decoration-none <?= $params['rentals'][0]->return_date != NULL ? 'pe-none' : '' ?>">
-    <button class="btn btn-primary" <?= $params['rentals'][0]->return_date != NULL ? 'disabled' : '' ?>>Rendre</button>
-  </a>
+  <div class="d-flex flex-column">
+    <a href="/locations/<?= $params['rentals'][0]->rental_id ?>/edit" class="text-decoration-none mb-3 <?= $params['rentals'][0]->return_date != NULL ? 'pe-none' : '' ?>">
+      <button class="btn btn-primary" <?= $params['rentals'][0]->return_date != NULL ? 'disabled' : '' ?>>Rendre</button>
+    </a>
+    <a href="/locations" class="text-decoration-none">
+      <button class="btn btn-warning">Retour a la liste</button>
+    </a>
+  </div>
   <div class="card col-8 mx-auto">
     <div class="card-header d-flex justify-content-between">
       <p class="card-text">Prix de la location <?= $params['rentals'][0]->rental_rate ?> $</p>

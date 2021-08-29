@@ -33,19 +33,21 @@ class Model
      * @param string $query SQL request
      * @param array $params for sql request
      * @param bool $single if you want multiple result or single
-     * @return object|array result
+     * @return object|array|int result
      * 
      */
     public function query(string $query, array $params = [], bool $single)
     {
 
         $sql = $query;
-        $res = $this->db->getPDO()->prepare($sql);
+        $pdo = $this->db->getPDO();
+        $res = $pdo ->prepare($sql);
 
         $res->execute($params);
 
         if ($single) {
-            return $res->fetch();
+            $res->fetch();
+            return $pdo->lastInsertId();
         } else {
             return $res->fetchAll();
         }

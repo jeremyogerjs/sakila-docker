@@ -58,7 +58,7 @@ class User extends Model
             LEFT JOIN address AS a ON s.address_id = a.address_id 
             LEFT JOIN city AS c ON a.city_id = c.city_id
             LEFT JOIN country AS cn ON c.country_id = cn.country_id
-        WHERE s.staff_id = ?', [$id], true);
+        WHERE s.staff_id = ?', [$id], false);
     }
     // create user for test DELETE THIS IN PRODUCTION
     public function store()

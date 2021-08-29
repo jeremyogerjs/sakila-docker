@@ -2,7 +2,7 @@
 
 <form action="/locations/search" method="POST" class="form">
   <div class="d-flex w-50 mx-auto">
-    <input class="form-control me-2 " name="query" type="search" placeholder="Rechercher par client ou par film" aria-label="Rechercher">
+    <input class="form-control me-2 " name="query" type="search" placeholder="Rechercher par nom/prenom client ou par film" aria-label="Rechercher">
     <button class="btn btn-outline-primary" type="submit">Rechercher</button>
   </div>
 </form>

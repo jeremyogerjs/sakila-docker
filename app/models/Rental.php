@@ -22,6 +22,12 @@ class Rental extends Model
         parent::__construct($db);
     }
 
+    /**
+     * 
+     * @param array -- 
+     * @return object|array 
+     * 
+     */
     public function all(array $columns = ['*'])
     {
         return $this->query("SELECT r.rental_id,r.customer_id,r.rental_date,r.return_date,r.inventory_id,r.staff_id,c.first_name as customerFirstName,
@@ -68,9 +74,17 @@ class Rental extends Model
             LEFT JOIN film AS f ON i.film_id = f.film_id
         WHERE lower(c.last_name) LIKE lower(?) OR lower(c.first_name) LIKE lower(?) OR lower(f.title) LIKE lower(?) ORDER BY rental_date DESC LIMIT 20", ["%$query%", "%$query%", "%$query%"], false);
     }
+    /**
+     * 
+     * @param int -- id of movie
+     * @return bool
+     * 
+     * 
+     */
     public function store($id)
     {
         $this->inventory_id = htmlspecialchars($id);
+
         return $this->query("INSERT INTO rental (rental_date,inventory_id,customer_id,return_date,staff_id)
         VALUES (?,?,?,?,?);
         ", [$this->rental_date, $this->inventory_id, $this->customer_id, $this->return_date, $this->staff_id], true);
@@ -79,9 +93,12 @@ class Rental extends Model
      * 
      * 
      * @param int -- id of rental
+     * @return bool 
+     * 
+     * 
      */
     public function update($idRental)
     {
-        return $this->query("UPDATE rental SET return_date = ? WHERE rental_id = ? ", [$this->return_date, $idRental], true);
+        return $this->query("UPDATE rental SET return_date = ? WHERE rental_id = ? ",[$this->return_date, $idRental], true);
     }
 }

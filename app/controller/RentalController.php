@@ -1,6 +1,8 @@
 <?php
-require('./app/models/Rental.php');
-require('./app/models/Customer.php');
+require_once('./app/models/Rental.php');
+require_once('./app/models/Movie.php');
+require_once('./app/models/Customer.php');
+require_once('./app/models/Payment.php');
 require_once('./app/models/User.php');
 require_once('./app/controller/Controller.php');
 
@@ -51,6 +53,7 @@ class RentalController extends Controller
     /**
      * 
      * @param int id of film
+     * @return view of form with data for select
      */
     public function create($id)
     {
@@ -71,10 +74,24 @@ class RentalController extends Controller
     public function store($id)
     {
         $this->isAuth();
-
         $rental = new Rental($_POST, $this->getDB());
-        $rental->store($id);
 
+        $idRental = $rental -> store($id);
+
+        $movies = new Movie($this ->getDB());
+        $movie = $movies ->show($id);
+        $amount = $movie[0]->rental_rate;
+
+        $paiment = [
+            "staff_id" => intval($_POST['staff_id']),
+            "customer_id" => intval($_POST['customer_id']),
+            "payment_date" => $_POST['rental_date'],
+            "amount" => floatval($amount),
+            "rental_id" => intval($idRental)
+        ];
+
+        $payment = new Payment($paiment,$this ->getDB());
+        $payment->store();
         header("Location:/locations");
     }
     public function search()

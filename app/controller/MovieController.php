@@ -1,8 +1,8 @@
 <?php
-require('./app/models/Movie.php');
-require('./app/models/Category.php');
-require('./app/models/Actor.php');
-require('./app/models/Store.php');
+require_once('./app/models/Movie.php');
+require_once('./app/models/Category.php');
+require_once('./app/models/Actor.php');
+require_once('./app/models/Store.php');
 require_once('./app/controller/Controller.php');
 
 class MovieController extends Controller
@@ -13,13 +13,10 @@ class MovieController extends Controller
         $category = new Category($this->getDB());
         $categories = $category->all();
 
-        $stores = new Store($this->getDB());
-        $store = $stores->all();
-
         $movie = new Movie($this->getDB());
         $data = $movie->all();
 
-        $this->render('movie.movies', compact('data', 'categories', 'store'));
+        $this->render('movie.movies', compact('data', 'categories'));
     }
 
     public function search()

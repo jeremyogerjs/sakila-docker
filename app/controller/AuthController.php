@@ -1,5 +1,5 @@
 <?php
-require('./app/models/User.php');
+require_once('./app/models/User.php');
 require_once('./app/controller/Controller.php');
 
 class AuthController extends Controller
