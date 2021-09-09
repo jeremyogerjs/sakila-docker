@@ -3,11 +3,11 @@ require('./routes/Router.php');
 
 
 // définition des constantes pour le path des divers fichiers
-define('VIEWS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'ecf-6' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
+define('VIEWS', 'views' . DIRECTORY_SEPARATOR);
 
 $router = new Router($_SERVER['REQUEST_URI']);
-
-
+echo "running docker php etc etc...";
+phpinfo();
 // page connexion default
 $router->get('', 'AuthController@index');
 

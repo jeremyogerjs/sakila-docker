@@ -31,11 +31,11 @@ class Controller
     {
         ob_start();
         $path = str_replace('.', DIRECTORY_SEPARATOR, $file);
-        require(VIEWS . $path . '.php');
+        require_once(VIEWS . $path . '.php');
 
         $content = ob_get_clean();
 
-        require(VIEWS . 'layout.php');
+        require_once(VIEWS . 'layout.php');
     }
 
     /**
